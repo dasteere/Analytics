@@ -1,0 +1,26 @@
+﻿Installing assembly 'C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.InstallLog
+   assemblypath = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.exe
+Installing service AnalyticsRtService...
+Creating EventLog source AnalyticsRtService in log Application...
+Rolling back assembly 'C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.InstallLog
+   assemblypath = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.exe
+Restoring event log to previous state for source AnalyticsRtService.
+Installing assembly 'C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.InstallLog
+   assemblypath = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.exe
+Installing service AnalyticsRtService...
+Service AnalyticsRtService has been successfully installed.
+Creating EventLog source AnalyticsRtService in log Application...
+Committing assembly 'C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.InstallLog
+   assemblypath = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsRtService\bin\Debug\AnalyticsRtService.exe

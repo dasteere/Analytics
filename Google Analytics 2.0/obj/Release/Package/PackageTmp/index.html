@@ -1,0 +1,690 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>GoDaddy Users</title>
+    <style>
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #panel {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            margin-left: -180px;
+            z-index: 5;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #999;
+            height: 600px;
+        }
+
+        .info {
+            position: absolute;
+            right: 10px;
+            top: 5%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 15px;
+            border: 2px solid #999;
+            max-height: 550px;
+        }
+        .loader {
+	        position: fixed;
+	        left: 0px;
+	        top: 0px;
+	        width: 100%;
+	        height: 100%;
+	        z-index: 9999;
+	        background: url('ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+        }
+        .container {
+            background-color: #fff;
+            height: 385px;
+            max-height: 385px;
+            overflow: auto;
+        }
+        .table {
+            min-width: 450px;
+        }
+        button:focus {outline:0;}
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="night-overlay.js"></script>
+    <script type="text/javascript" src="markerAnimate.js"></script>
+    <script>
+        var map, pointarray, pointarray2, heatmap, heatmap2, heatmap3, heatmap4;
+        var uri = 'api/user/world';
+        var uri2 = 'api/user/america';
+        var str = "hello";
+        var taxiData = [], taxiData2 = [];
+        var curCities = [0,0,0,0,0], curCountries = [0,0,0,0,0];
+        var infowindow;
+        $(document).ready(function() {
+            $("#tableId").hide();
+            $.when(initWorld(), initAmerica()).done(function () {
+                initialize();
+            });
+        });
+
+        function initWorld() {
+            return $.getJSON(uri)
+                .done(function(data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function(key, item) {
+                        // Add a list item for the product.
+                        if (item.Latitude !== 0 && item.Longitude !== 0) {
+                            taxiData.push({
+                                location: new google.maps.LatLng(item.Latitude, item.Longitude),
+                                weight: item.Count
+                            });
+                        }
+                    });
+                });
+        }
+
+        function initAmerica() {
+            return $.getJSON(uri2)
+                .done(function(data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function(key, item) {
+                        // Add a list item for the product.
+                        if (item.Latitude !== 0 && item.Longitude !== 0) {
+                            taxiData2.push({
+                                location: new google.maps.LatLng(item.Latitude, item.Longitude),
+                                weight: item.Count
+                            });
+                        }
+                    });
+                });
+        }
+
+        function initialize() {
+          var pointArray = new google.maps.MVCArray(taxiData), pointArray2 = new google.maps.MVCArray(taxiData2);
+            heatmap = new google.maps.visualization.HeatmapLayer({
+              data: pointArray
+          });
+          heatmap2 = new google.maps.visualization.HeatmapLayer({
+              data: pointArray
+          });
+          heatmap3 = new google.maps.visualization.HeatmapLayer({
+              data: pointArray2
+          });
+          heatmap4 = new google.maps.visualization.HeatmapLayer({
+              data: pointArray2
+          });
+          var mapOptions = {
+            zoom: 3,
+            center: new google.maps.LatLng(20, 20),
+            mapTypeId: google.maps.MapTypeId.LANDSCAPE
+          };
+          map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+            //updateHeatMap();
+          nite.init(map);
+          google.maps.event.addListenerOnce(map, 'idle', function () {
+              // do something only the first time the map is loaded
+              $(".loader").fadeOut("slow");
+          });
+          google.maps.event.addListener(map, 'zoom_changed', function () {
+              // 3 seconds after the center of the map has changed, pan back to the
+              // marker.
+              changeRadius();
+          });
+          heatmap2.set('opacity', 0.6);
+          heatmap.set('opacity', 0.6);
+          heatmap.setMap(map);
+          heatmap4.set('opacity', 0.6);
+          heatmap3.set('opacity', 0.6);
+          heatmap3.setMap(map);
+          changeRadius();
+          
+          updateText();
+          getData();
+          updateRecentChange();
+        }
+
+        function changeRadius() {
+            switch (map.getZoom()) {
+                case 1:
+                    heatmap.set('radius', 4);
+                    heatmap2.set('radius', 4);
+                    heatmap3.set('radius', 4);
+                    heatmap4.set('radius', 4);
+                    break;
+                case 2:
+                    heatmap.set('radius', 9);
+                    heatmap2.set('radius', 9);
+                    heatmap3.set('radius', 9);
+                    heatmap4.set('radius', 9);
+                    break;
+                case 3:
+                    heatmap.set('radius', 20);
+                    heatmap2.set('radius', 20);
+                    heatmap3.set('radius', 20);
+                    heatmap4.set('radius', 20);
+                    break;
+                case 4:
+                    heatmap.set('radius', 42);
+                    heatmap2.set('radius', 42);
+                    heatmap3.set('radius', 42);
+                    heatmap4.set('radius', 42);
+                    break;
+                case 5:
+                    heatmap.set('radius', 70);
+                    heatmap2.set('radius', 70);
+                    heatmap3.set('radius', 70);
+                    heatmap4.set('radius', 70);
+                    break;
+                case 6:
+                    heatmap.set('radius', 100);
+                    heatmap2.set('radius', 100);
+                    heatmap3.set('radius', 100);
+                    heatmap4.set('radius', 100);
+                    break;
+                case 7:
+                    heatmap.set('radius', 150);
+                    heatmap2.set('radius', 150);
+                    heatmap3.set('radius', 150);
+                    heatmap4.set('radius', 150);
+                    break;
+                default:
+                    if (map.getZoom() > 7) {
+                        heatmap.set('radius', 300);
+                        heatmap2.set('radius', 300);
+                        heatmap3.set('radius', 300);
+                        heatmap4.set('radius', 300);
+                    }
+            }
+        }
+
+        function updateHeatMap() {
+            var uri = 'api/user/world';
+            var uri2 = 'api/user/america';
+            var storeData = [], storeData2 = [];
+            var start = function () {
+                var r = $.Deferred();
+                heatmap2.set('opacity', 0.0);
+                heatmap4.set('opacity', 0.0);
+                heatmap2.setMap(map);
+                heatmap4.setMap(map);
+                setTimeout(function () {
+                    r.resolve();
+                }, 500);
+                return r;
+            }
+            var end = function() {
+                heatmap.setMap(null);
+                heatmap2.set('opacity', 0.6);
+                heatmap3.setMap(null);
+                heatmap4.set('opacity', 0.6);
+                $.getJSON(uri)
+                    .done(function(data) {
+                        // On success, 'data' contains a list of products.
+                        $.each(data, function(key, item) {
+                            // Add a list item for the product.
+                            if (item.Latitude !== 0 && item.Longitude !== 0) {
+                                storeData.push({
+                                    location: new google.maps.LatLng(item.Latitude, item.Longitude),
+                                    weight: item.Count
+                                });
+                            }
+                        });
+                        var pointArray = new google.maps.MVCArray(storeData);
+                        //heatmap.setMap(null);
+
+                        heatmap.setData(pointArray);
+                        changeRadius();
+                        //heatmap.set('opacity', null);
+                        var functionOne = function() {
+                            var r = $.Deferred();
+                            heatmap.set('opacity', 0.0);
+                            heatmap.setMap(map);
+                            setTimeout(function() {
+                                r.resolve();
+                            }, 500);
+                            return r;
+                        }
+                        var functionTwo = function() {
+                            $.getJSON(uri2)
+                            .done(function (data2) {
+                                // On success, 'data' contains a list of products.
+                                $.each(data2, function (key, item) {
+                                    // Add a list item for the product.
+                                    if (item.Latitude !== 0 && item.Longitude !== 0) {
+                                        storeData2.push({
+                                            location: new google.maps.LatLng(item.Latitude, item.Longitude),
+                                            weight: item.Count
+                                        });
+                                    }
+                                });
+                                var pointArray2 = new google.maps.MVCArray(storeData2);
+                                //heatmap.setMap(null);
+
+                                heatmap3.setData(pointArray2);
+                                changeRadius();
+                                //heatmap.set('opacity', null);
+                                var function1 = function () {
+                                    var r = $.Deferred();
+                                    heatmap3.set('opacity', 0.0);
+                                    heatmap3.setMap(map);
+                                    setTimeout(function () {
+                                        r.resolve();
+                                    }, 500);
+                                    return r;
+                                }
+                                var function2 = function () {
+                                    heatmap2.setData(pointArray);
+                                    heatmap2.setMap(null);
+                                    heatmap.set('opacity', 0.6);
+                                    heatmap4.setData(pointArray2);
+                                    heatmap4.setMap(null);
+                                    heatmap3.set('opacity', 0.6);
+                                }
+                                function1().done(function2);
+                                //heatmap2.setData(pointArray);
+                            });
+                            
+                        }
+                        functionOne().done(functionTwo);
+                        
+                    });
+            }
+            start().done(end);
+        }
+
+        function updateCities(uri)
+        {
+            var current = 1;
+            var futNums = [];
+            $.getJSON(uri)
+                .done(function(data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function(key, item) {
+                        // Add a list item for the product.
+                        if (current <= 5) {
+                            futNums.push(item.Count);
+                            var str;
+                            var elem = document.getElementById("city" + current);
+                            if (elem.innerHTML.includes("red"))
+                                str = (Math.round(curCities[current - 1]) + "");//.fontcolor("red");
+                            else
+                                str = (Math.round(curCities[current - 1]) + "");//.fontcolor("209720");
+                            var img = "";
+                            if (elem.innerHTML.includes("png"))
+                                img = elem.innerHTML.substring(0, elem.innerHTML.indexOf("png") + 7);
+                            document.getElementById("city" + current).innerHTML = img + item.Name + ", " + item.Country + ": " + str;
+                        }
+                        current++;
+                    });
+                    for (var i = 0; i < 5; i++) {
+                        setTimeout(updateNum, Math.random() * 5000, "city" + (i + 1), i, futNums[i], (futNums[i] - curCities[i]) / (100 + (Math.random() * 20 - 10)), false, 0);
+                    }
+                });
+        } 
+
+        function updateCountries(uri)
+        {
+            var current = 1;
+            var futNums = [];
+            $(document).ready(function() {
+                $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function (key, item) {
+                        // Add a list item for the product.
+                        if (current <= 5) {
+                            futNums.push(item.Count);
+                            var str;
+                            var elem = document.getElementById("country" + current)
+                            if (elem.innerHTML.includes("red"))
+                                str = (Math.round(curCountries[current - 1]) + ""); //.fontcolor("red");
+                            else
+                                str = (Math.round(curCountries[current - 1]) + "");//.fontcolor("209720");
+                            var img = "";
+                            if (elem.innerHTML.includes("png"))
+                                img = elem.innerHTML.substring(0, elem.innerHTML.indexOf("png") + 7);
+                            document.getElementById("country" + current).innerHTML = img + item.Name + ": " + str;
+                        }
+                        current++;
+                    });
+                    for (var i = 0; i < 5; i++) {
+                        setTimeout(updateNum, Math.random() * 10000, "country" + (i + 1), i, futNums[i], (futNums[i] - curCountries[i]) / (150), true, 0);
+                    }
+                });
+            });
+            
+        } 
+
+        function updateNum(id, i, end, step, country, elapsed) {
+            if (elapsed > 1000) return;
+            var cur;
+            if (isNaN(step)) return;
+            if (country) {
+                cur = Math.round(curCountries[i]);
+                curCountries[i] += step;
+            } else {
+                cur = Math.round(curCities[i]);
+                curCities[i] += step;
+            }
+            var elem = document.getElementById(id);
+            var place = elem.innerHTML.substring(0, elem.innerHTML.indexOf(":") + 2);
+            if (place.includes("png")) {
+                place = elem.innerHTML.substring(elem.innerHTML.indexOf("png") + 7, elem.innerHTML.indexOf(":") + 2);
+            }
+            if ((step < 0 && cur < end) || (step > 0 && cur > end) || cur == end) {
+                //elem.innerHTML = place + cur;
+                return;
+            }
+            var str = cur + "";
+            var img;
+            if (step > 0) {
+                //str = str.fontcolor("209720");
+                img = '<img dipslay=\'none\' src=\'uparrow.png\'>  ';
+            } else {
+                //str = str.fontcolor("red");
+                img = '<img display=\'none\' src=\'downarrow.png\'>  '
+            }
+            elem.innerHTML = img + place + str;
+            setTimeout(updateNum, 10, id, i, end, step, country, elapsed + 10);
+        }
+
+        function updateRecentChange() {
+            var uri = 'api/user/change';
+            var changePoints = [];
+            $.getJSON(uri)
+                .done(function (data) {
+                    // On success, 'data' contains a list of products.
+                    $.each(data, function (key, item) {
+                        // Add a list item for the product.
+                        changePoints.push(item);
+                    });
+                    var len = changePoints.length;
+                    var pause = 30000 / len;
+                    changePoints = (function(array) {
+                        var currentIndex = array.length, temporaryValue, randomIndex;
+
+                        // While there remain elements to shuffle...
+                        while (0 !== currentIndex) {
+
+                            // Pick a remaining element...
+                            randomIndex = Math.floor(Math.random() * currentIndex);
+                            currentIndex -= 1;
+
+                            // And swap it with the current element.
+                            temporaryValue = array[currentIndex];
+                            array[currentIndex] = array[randomIndex];
+                            array[randomIndex] = temporaryValue;
+                        }
+                        return array;
+                    })(changePoints);
+                    var markerArray = [];
+                    function addDynamicMarker(location, startloc, size) {
+                        var marker = new google.maps.Marker({
+                            position: startloc,
+                            map: map,
+                            draggable: false,
+                            opacity: 1.0,
+                            icon: {
+                                url: 'push_pin.png'/*'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|03D10C'*/,
+                                anchor: new google.maps.Point(3, 28),
+                                //size of push pin
+                                scaledSize: new google.maps.Size(32 * Math.sqrt(Math.sqrt(size))/2,32 * Math.sqrt(Math.sqrt(size))/2)
+                            },
+                            optimized: false,
+                            label: size + '\\norm'
+                        });
+                        marker.animateTo(location, {
+                            duration: 100
+                        });
+                        google.maps.event.addListener(marker, 'mouseover', function () {
+                            infowindow = new google.maps.InfoWindow({
+                                content: "New Users: " + marker.label.substring(0,marker.label.indexOf("\\"))
+                        });
+                            infowindow.open(map, this);
+                            this.label += "\\open";
+                        });
+
+                        google.maps.event.addListener(marker, 'mouseout', function () {
+                            if (this.label.substring(this.label.lastIndexOf("\\") + 1, this.label.length) == "delete") this.setMap(null);
+                            else this.label += "\\norm";
+                            infowindow.close();
+                        });
+                        var keep = Math.sqrt(size) * 1500 + 500;
+                        setTimeout(function fade() {
+                            if (marker.label.substring(marker.label.lastIndexOf("\\") + 1, marker.label.length) == "open") {
+                                marker.label += "\\delete";
+                                return;
+                            }
+                            marker.setOpacity(marker.opacity - 0.2);
+                            if (marker.opacity <= 0) {
+                                marker.setMap(null);
+                                delete marker;
+                            } else {
+                                setTimeout(fade, 35);
+                            }
+                        }, keep);
+                        return marker;
+                    }
+                    for (var i = 0; i < len; i++) {
+                        var latlng = new google.maps.LatLng(changePoints[i].Latitude, changePoints[i].Longitude);
+                        var endlatlng = new google.maps.LatLng(changePoints[i].Latitude+0.6, changePoints[i].Longitude+1.0);
+                        var delay = i * pause + ((Math.random() * pause) - (pause / 2));
+                        setTimeout(addDynamicMarker,delay,latlng, endlatlng, changePoints[i].Count);
+                    }
+                });
+        }
+
+        function animateMarker(marker, i) {
+            marker.opacity = (i * .2);
+            if (marker.opacity <= 0) {
+                marker.setMap(null);
+                delete marker;
+            } else {
+                setTimeout(animateMarker, 10, i--);
+            }
+        }
+
+        function updateText() {
+            updateCities('api/user/city');
+            updateCountries('api/user/country');
+        }
+
+        function getData() {
+            setTimeout(setInterval(updateHeatMap, 3600000), 0);
+            setTimeout(setInterval(updateText, 5000), 0);
+            setTimeout(setInterval(updateRecentChange, 30000), 0);
+            setInterval(function () { nite.refresh() }, 10000);
+        }
+
+        function updateTable() {
+            $("#textId").hide();
+            $("#tableId").show();
+            if (document.getElementById("countryRadio").checked) {
+                fillTable('api/user/countries', "Country");
+            } else {
+                fillTable('api/user/cities', "City");
+            }
+        }
+
+        function fillTable(uri, table) {
+            deleteTable();
+            $('#search').val('');
+            document.getElementById("search").placeholder = "Find a " + table;
+            var countries = [];
+            $.when(ajax1()).done(function () {
+                countries = countries.sort(function (a, b) {
+                    if (a.Count > b.Count)
+                        return -1;
+                    if (a.Count < b.Count)
+                        return 1;
+                    return 0;
+                });
+
+                var html = '<tr><th align="left">Rank</th><th align="left">' + table + '</th><th align="left">Users</th></tr>';
+                for (var i = 0; i < countries.length; i++) {
+                    if (table.includes("try")) {
+                        html += '<tr><td>' + (i + 1) + '.</td><td>' + countries[i].Name + '</td><td>' + countries[i].Count + '</td></tr>';
+                    } else {
+                        html += '<tr><td>' + (i + 1) + '.</td><td>' + countries[i].Name + ', ' + countries[i].Country +  '</td><td>' + countries[i].Count + '</td></tr>';
+                    }
+
+                }
+                $('#dataTable tr').first(html).after(html);
+                $('#dataTable tr:first').remove();
+                var $rows = $('#dataTable tr');
+                $('#search').keyup(function () {
+                    $('#dataTable tr:first').remove();
+                    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+                    $rows.show().filter(function () {
+                        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                        return !~text.indexOf(val);
+                    }).hide();
+                    var head = '<tr><th align="left">Rank</th><th align="left">' + table + '</th><th align="left">Users</th></tr>';
+                    $('#dataTable tr').first().before(head);
+                });
+            });
+
+            function ajax1() {
+                return $.getJSON(uri)
+                    .done(function (data) {
+                        // On success, 'data' contains a list of products.
+                        $.each(data, function (key, item) {
+                            // Add a list item for the product.
+                            countries.push(item);
+                        });
+                    });
+            }
+        }
+
+        function textView() {
+            $("#textId").show();
+            $("#tableId").hide();
+        }
+
+        function checkChange(country) {
+            var ctry = document.getElementById("countryRadio");
+            var same = document.getElementById("search").placeholder;//.contains("Country");
+            if (ctry.checked && (country && !same.includes("Country"))) {
+                fillTable('api/user/countries', "Country");
+            } else if (!ctry.checked && (!country && !same.includes("City"))) {
+                fillTable('api/user/cities', "City");
+            } 
+        }
+
+        function deleteTable() {
+            $("tbody").children().remove();
+            var table = document.getElementById("dataTable");
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = "Rank";
+            cell2.innerHTML = "Country";
+            cell3.innerHTML = "Users";
+        }
+
+        function arrowClick() {
+            if ($("#textId").is(':visible')) {
+                updateTable();
+                document.getElementById("arrows").src = "left-arrow.png";
+            } else {
+                textView();
+                document.getElementById("arrows").src = "right-arrow.png";
+            }
+        }
+
+        function mouseOver() {
+            if ($("#textId").is(':visible')) {
+                document.getElementById("arrows").src = "right-arrow-green.png";
+            } else {
+                document.getElementById("arrows").src = "left-arrow-green.png";
+            }
+        }
+
+        function mouseOut() {
+            if ($("#textId").is(':visible')) {
+                document.getElementById("arrows").src = "right-arrow.png";
+            } else {
+                document.getElementById("arrows").src = "left-arrow.png";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="loader"></div>
+    <div class="info">
+        <img src="gd_logo.png"/>
+        
+        <p>
+            <font size="5px" bold="true" style="margin-right: 10px">Current Users</font>
+            <input id="arrows" type="image" src="right-arrow.png" onclick="arrowClick()" onmouseover="mouseOver()" onmouseout="mouseOut()" style="float: right; margin-top: 5px; outline: none;">
+        </p>
+        
+        
+        <div id="textId">
+            <hr />
+            <strong>Top Cities</strong>
+            <p id="city1">
+                America: <font color="green">0</font>
+            </p>
+            <p id="city2">
+                Great Britain: <font color="green">0</font>
+            </p>
+            <p id="city3">
+                America: <font color="green">0</font>
+            </p>
+            <p id="city4">
+                Great Britain: <font color="green">0</font>
+            </p>
+            <p id="city5">
+                America: <font color="green">0</font>
+            </p>
+            <strong>Top Countries</strong>
+            <p id="country1">
+                America: <font color="green">0</font>
+            </p>
+            <p id="country2">
+                Great Britain: <font color="green">0</font>
+            </p>
+            <p id="country3">
+                America: <font color="green">0</font>
+            </p>
+            <p id="country4">
+                Great Britain: <font color="green">0</font>
+            </p>
+            <p id="country5">
+                America: <font color="green">0</font>
+            </p>
+        </div>
+        <div id="tableId">
+            <hr/>
+            <label><input id ="countryRadio" type="radio" name="test" value="1" onclick="checkChange(true)" checked="checked"> Country</label>
+            <label><input id="cityRadio" type="radio" name="test" value="0" onclick="checkChange(false)"> City</label>
+            <div>
+                <input type="text" id="search" placeholder="Find a City" style="margin-top: 10px; width: 100%">
+            </div>
+            <div class="container">
+                <div class="first">
+                    <table id="dataTable" class="table" cellspacing="10">
+                        <tr>
+                            <th align="left">Rank</th>
+                            <th align="left">Country</th>
+                            <th align="left">Users</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div id="map-canvas"></div>
+
+</body>
+</html>

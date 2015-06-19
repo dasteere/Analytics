@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google Analytics 2.0", "Google Analytics 2.0\Google Analytics 2.0.csproj", "{0444500B-6B68-4708-843A-B4824A0785E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateRt", "Console Application\UpdateRt.csproj", "{461ED539-7C40-49DA-93D6-60D17F9CE3D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateTopPlaces", "UpdateCities\UpdateTopPlaces.csproj", "{8CE94A62-D322-491E-A52A-3386C812F41F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateAggregate", "UpdateAggregate\UpdateAggregate.csproj", "{5A709563-A303-4529-BF01-4BA68AAEBB7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyticsPlaceService", "AnalyticsPlaceService\AnalyticsPlaceService.csproj", "{87EB4C4D-8A4C-44C0-B15A-C3F109A6686B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyticsRtService", "AnalyticsRtService\AnalyticsRtService.csproj", "{41EB1439-4E63-4CD8-BA16-B7C53E0BFBE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyticsAggregateService", "AnalyticsAggregateService\AnalyticsAggregateService.csproj", "{AAE34241-B6C9-4F5F-9D04-1F5B25FD6AE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0444500B-6B68-4708-843A-B4824A0785E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0444500B-6B68-4708-843A-B4824A0785E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0444500B-6B68-4708-843A-B4824A0785E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0444500B-6B68-4708-843A-B4824A0785E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461ED539-7C40-49DA-93D6-60D17F9CE3D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461ED539-7C40-49DA-93D6-60D17F9CE3D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461ED539-7C40-49DA-93D6-60D17F9CE3D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461ED539-7C40-49DA-93D6-60D17F9CE3D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CE94A62-D322-491E-A52A-3386C812F41F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CE94A62-D322-491E-A52A-3386C812F41F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CE94A62-D322-491E-A52A-3386C812F41F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CE94A62-D322-491E-A52A-3386C812F41F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A709563-A303-4529-BF01-4BA68AAEBB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A709563-A303-4529-BF01-4BA68AAEBB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A709563-A303-4529-BF01-4BA68AAEBB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A709563-A303-4529-BF01-4BA68AAEBB7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87EB4C4D-8A4C-44C0-B15A-C3F109A6686B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87EB4C4D-8A4C-44C0-B15A-C3F109A6686B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87EB4C4D-8A4C-44C0-B15A-C3F109A6686B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87EB4C4D-8A4C-44C0-B15A-C3F109A6686B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41EB1439-4E63-4CD8-BA16-B7C53E0BFBE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41EB1439-4E63-4CD8-BA16-B7C53E0BFBE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41EB1439-4E63-4CD8-BA16-B7C53E0BFBE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41EB1439-4E63-4CD8-BA16-B7C53E0BFBE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAE34241-B6C9-4F5F-9D04-1F5B25FD6AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAE34241-B6C9-4F5F-9D04-1F5B25FD6AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAE34241-B6C9-4F5F-9D04-1F5B25FD6AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAE34241-B6C9-4F5F-9D04-1F5B25FD6AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

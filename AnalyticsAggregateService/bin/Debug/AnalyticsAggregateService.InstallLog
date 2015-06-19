@@ -1,0 +1,13 @@
+﻿Installing assembly 'C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsAggregateService\bin\Debug\AnalyticsAggregateService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsAggregateService\bin\Debug\AnalyticsAggregateService.InstallLog
+   assemblypath = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsAggregateService\bin\Debug\AnalyticsAggregateService.exe
+Installing service AnalyticsAggregateService...
+Service AnalyticsAggregateService has been successfully installed.
+Creating EventLog source AnalyticsAggregateService in log Application...
+Committing assembly 'C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsAggregateService\bin\Debug\AnalyticsAggregateService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsAggregateService\bin\Debug\AnalyticsAggregateService.InstallLog
+   assemblypath = C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\AnalyticsAggregateService\bin\Debug\AnalyticsAggregateService.exe

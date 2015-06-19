@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        .container {
+            width: 80%;
+            height: 100%;
+            margin: auto;
+            position: absolute;
+            left: 20px
+        }
+        .first {
+            max-width: 50%;
+            float: left;
+            max-height: 500px;
+            overflow: auto;
+            border-bottom: 1px #CCC;
+        }
+        .second {
+            max-width: 50%;
+            float: left;
+            max-height: 500px;
+            overflow: auto;
+            margin-left: 10%;
+        }
+        .table {
+            
+        }
+    </style>
+    <title>Table View</title>
+    <meta charset="utf-8"/>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            responseHandler("api/user/countries", '#dataTable tr');
+            responseHandler("api/user/cities", '#dataTable2 tr');
+        });
+        function responseHandler(uri, table) {
+            var countries = [];
+            $.when(ajax1()).done(function() {
+                countries = countries.sort(function (a, b) {
+                    if (a.Count > b.Count)
+                        return -1;
+                    if (a.Count < b.Count)
+                        return 1;
+                    return 0;
+                });
+
+                var html = '';
+                for (var i = 0; i < countries.length; i++)
+                    html += '<tr><td>' + (i+1) + '.</td><td>' + countries[i].Name + '</td><td>' + countries[i].Count + '</td></tr>';
+                $(table).first().after(html);
+                var $rows = $('#dataTable tr');
+                $('#search').keyup(function () {
+                    $('#dataTable tr:first').remove();
+                    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+                    $rows.show().filter(function () {
+                        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                        return !~text.indexOf(val);
+                    }).hide();
+                    var head = '<tr><th align="left">Rank</th><th align="left">Country</th><th align="left">Users</th></tr>';
+                    $('#dataTable tr').first().before(head);
+                });
+
+                var $rows2 = $('#dataTable2 tr');
+                $('#search2').keyup(function () {
+                    $('#dataTable2 tr:first').remove();
+                    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+                    $rows2.show().filter(function () {
+                        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                        return !~text.indexOf(val);
+                    }).hide();
+                    var head = '<tr><th align="left">Rank</th><th align="left">City</th><th align="left">Users</th></tr>';
+                    $('#dataTable2 tr').first().before(head);
+                });
+            });
+
+            function ajax1() {
+                return $.getJSON(uri)
+                    .done(function (data) {
+                        // On success, 'data' contains a list of products.
+                        $.each(data, function (key, item) {
+                            // Add a list item for the product.
+                            countries.push(item);
+                        });
+                    });
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="text" id="search" placeholder="Find a Country" style="margin-left: 20px">
+<input type="text" id="search2" placeholder="Find a City" style="margin-left: 20px">
+<div class="container">
+    <div class="first">
+        <table id="dataTable" class="table" cellspacing="10" >
+            <tr>
+                <th align="left">Rank</th>
+                <th align="left">Country</th>
+                <th align="left">Users</th>
+            </tr>
+        </table>
+    </div>
+    <div class="second" style="padding-left: 20px">
+        <table class="table"id="dataTable2" cellspacing="10">
+            <tr>
+                <th align="left">Rank</th>
+                <th align="left">City</th>
+                <th align="left">Users</th>
+            </tr>
+        </table>
+    </div>
+    <form action="index.html">
+        <input type="submit" value="Map View">
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google Analytics 2.0.dll.config
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google Analytics 2.0.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google Analytics 2.0.pdb
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Analytics.v3.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Auth.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Auth.PlatformServices.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Core.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.PlatformServices.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\log4net.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Microsoft.Threading.Tasks.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Newtonsoft.Json.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Net.Http.Extensions.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Net.Http.Formatting.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Net.Http.Primitives.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Web.Http.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Web.Http.WebHost.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Zlib.Portable.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.pdb
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Analytics.v3.pdb
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Analytics.v3.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Auth.pdb
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Auth.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Auth.PlatformServices.pdb
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Auth.PlatformServices.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Core.pdb
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.Core.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.PlatformServices.pdb
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Google.Apis.PlatformServices.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\log4net.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Microsoft.Threading.Tasks.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Net.Http.Extensions.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Net.Http.Primitives.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Zlib.Portable.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\Newtonsoft.Json.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Net.Http.Formatting.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Web.Http.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\bin\System.Web.Http.WebHost.xml
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\obj\Debug\Google Analytics 2.0.csproj.App.config
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\obj\Debug\Google Analytics 2.0.csprojResolveAssemblyReference.cache
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\obj\Debug\Google Analytics 2.0.dll
+C:\Users\asteere\Documents\Visual Studio 2015\Projects\Google Analytics 2.0\Google Analytics 2.0\obj\Debug\Google Analytics 2.0.pdb
